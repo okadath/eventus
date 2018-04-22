@@ -7,7 +7,8 @@ class EventoForm(forms.ModelForm):
 		#crea los formularios en automatico
 		#el exclude evita los atributos que no deben ser generados por
 		#el usuario
-		exclude=('views','organizer','created','modified',)
+		#quitar organizer
+		exclude=('views','created','modified',)
 		widgets={
 		'name':forms.TextInput(attrs={'class':'form-control'}),
 		'summary':forms.Textarea(attrs={'class':'form-control','rows':'2'}),
@@ -20,4 +21,4 @@ class EventoForm(forms.ModelForm):
 		'is_free':forms.CheckboxInput(attrs={'class':'form-control'}),
 		'amount':forms.NumberInput(attrs={'class':'form-control'}),
 		}
- 
+  
