@@ -24,6 +24,8 @@ staticfiles_storage.url('events/static')
 
 urlpatterns = [
 	url(r'^', include('apps.events.urls', namespace="events_app")),
+    url(r'^', include('apps.users.urls', namespace="users_app")),
+
     url(r'^admin/', admin.site.urls),
 ]
 

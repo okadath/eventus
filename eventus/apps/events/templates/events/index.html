@@ -21,7 +21,7 @@
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'events_app:panel' %}">Hola {{ user.username|capfirst }}</a></li>
                 {% else %}
-                <li><a href="">Sign Up / Login</a></li>
+                <li><a href="{% url 'users_app:login' %}">Sign Up / Login</a></li>
                 {% endif %}
             </ul>
         </div><!--/.nav-collapse -->
@@ -32,7 +32,7 @@
   <div class="container text-center">
     <h1>EVENTUS</h1>
     <p>Bienvenido a EVENTUS, aquí podrás encontrar eventos que se den en tu ciudad e inscribirte on-line con un solo click.</p>
-    <p>¡<a href="" role="button">Registrate</a> y crea tu evento ahora!</p>
+    <p>¡<a href="{% url 'users_app:login' %}" role="button">Registrate</a> y crea tu evento ahora!</p>
   </div>
 </div>
 

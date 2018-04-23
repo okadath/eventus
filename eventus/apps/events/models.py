@@ -9,7 +9,7 @@ from django.conf import settings
 
 class TimeStampModel(models.Model):
 	created=models.DateTimeField(auto_now_add=True)
-	modified=models.DateTimeField(auto_now_add=True)
+	modified=models.DateTimeField(auto_now=True)
 
 	class Meta:
 		abstract=True#no se crea una tabla al migrar
@@ -37,8 +37,8 @@ class Event(TimeStampModel):
 	imagen=models.ImageField(upload_to='events')#!
 	is_free=models.BooleanField(default=True)
 	amount=models.DecimalField(max_digits=5,decimal_places=2, default=0.00)
-	views=models.PositiveIntegerField(default=0)
-	organizer=models.ForeignKey(settings.AUTH_USER_MODEL)#!
+	views=models.PositiveIntegerField(default=0, blank=True, null=True)
+	organizer=models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)#!
 
 
 	def save(self, *args, **kwargs):
