@@ -5,7 +5,8 @@ from django.shortcuts import render,redirect
 from .forms import UserRegisterForm,LoginForm
 from .models import User
 from django.utils import timezone
-from django.contrib.auth import login,authenticate,logout
+from django.contrib.auth import logout#login,authenticate
+from .functions import LogIn
 
 # Create your views here.
 
@@ -23,17 +24,22 @@ def userlogin(request):
 				User.objects.create_user(username=user_register.cleaned_data['username'],
 					email=user_register.cleaned_data['email'],password=user_register.cleaned_data['password'],
 					last_login=timezone.now() )
+				LogIn(request,user_register.cleaned_data['username'],
+					user_register.cleaned_data['password'])
 				return redirect('/')
 		if 'login_form' in request.POST:
 			login_form=LoginForm(request.POST)
 			if login_form.is_valid():
+				LogIn(request,login_form.cleaned_data['username'],
+					login_form.cleaned_data['password'])
+				return redirect('/')
 				#authenticate devuelve el objeto del usuario o none
-				user=authenticate(username=login_form.cleaned_data['username'],
-					password=login_form.cleaned_data['password'])
-				if user is not None:
-					if user.is_active:
-						login(request,user)
-						return redirect('/')
+				# user=authenticate(username=login_form.cleaned_data['username'],
+				# 	password=login_form.cleaned_data['password'])
+				# if user is not None:
+				# 	if user.is_active:
+				# 		login(request,user)
+				# 		return redirect('/')
 
 
 	#si aun no enviamos el form de signin:
